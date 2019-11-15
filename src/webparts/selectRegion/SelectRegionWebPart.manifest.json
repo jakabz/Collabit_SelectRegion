@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5de6a743-4263-42ae-bb0d-9cf8031878a5",
+  "alias": "SelectRegionWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "Select region" },
+    "description": { "default": "Select region description" },
+    "officeFabricIconFontName": "Globe",
+    "properties": {
+      "title": "Select region"
+    }
+  }]
+}
