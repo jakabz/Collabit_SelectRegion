@@ -12,7 +12,7 @@ export default class SelectRegion extends React.Component<ISelectRegionProps, {}
   private save:any;
   private self = this;
   
-  clickHandler(item,e) {
+  public clickHandler(item,e) {
     console.info(item);
     if(this.save){
       cookie.save('SelectedCountry', item.Link.Url, { path: '/' });
@@ -22,7 +22,7 @@ export default class SelectRegion extends React.Component<ISelectRegionProps, {}
     }
   }
 
-  onChangeChoice(self,e) {
+  public onChangeChoice(self,e) {
     self.save = e.currentTarget.checked;
   }
 
