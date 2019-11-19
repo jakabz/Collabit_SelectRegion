@@ -43,19 +43,12 @@ export default class SelectRegion extends React.Component<ISelectRegionProps, {}
             <span>{this.props.title}</span>
           </div>
         : ''}
-        {this.props.userCountry || this.props.cookieValue ? 
-          <div className={ styles.DataPane }>
-            <div>This user country: {this.props.userCountry}</div>
-            <div>This cookie country: {this.props.cookieValue}</div>
+        <div className={styles.flagsList}>
+          {this.items}
+          <div className={styles.saveRow}>
+            <Checkbox label="Remember your choice" onChange={this.onChangeChoice.bind(this.self,this)} />
           </div>
-        : 
-          <div className={styles.flagsList}>
-            {this.items}
-            <div className={styles.saveRow}>
-              <Checkbox label="Remember your choice" onChange={this.onChangeChoice.bind(this.self,this)} />
-            </div>
-          </div>
-        }
+        </div>
       </div>
     );
   }

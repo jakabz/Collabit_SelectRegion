@@ -46,21 +46,26 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
       .get((error: any, response: any) => {
         if(response){
           var lng = response.country;
-          if(lng || location.search.indexOf('?flags') == -1){
-            if(lng){
-              lng == 'HU' ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
-              element.props.userCountry = lng;
+          if(lng && location.search.indexOf('?flags') == -1){
+            lng == 'HU' ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
+            element.props.userCountry = lng;
+          }
+          if(lng && location.search.indexOf('?flags') > -1){
+            this._getListData().then((resp) => {
+              element.props.countryList = resp.value;
               ReactDom.render(element, this.domElement);
-            } else if(element.props.cookieValue){
-              //location.href = element.props.cookieValue;
+            });
+          }
+          if(element.props.cookieValue && !lng && location.search.indexOf('?flags') == -1){
+            location.href = element.props.cookieValue;
+          }
+          if(element.props.cookieValue && !lng && location.search.indexOf('?flags') > -1){
+            this._getListData().then((resp) => {
+              element.props.countryList = resp.value;
               ReactDom.render(element, this.domElement);
-            } else {
-              this._getListData().then((resp) => {
-                element.props.countryList = resp.value;
-                ReactDom.render(element, this.domElement);
-              });
-            }
-          } else {
+            });
+          }
+          if(!element.props.cookieValue && !lng){
             this._getListData().then((resp) => {
               element.props.countryList = resp.value;
               ReactDom.render(element, this.domElement);
