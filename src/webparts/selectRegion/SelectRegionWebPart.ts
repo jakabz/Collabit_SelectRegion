@@ -47,7 +47,7 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
         if(response){
           var lng = response.country;
           if(lng && location.search.indexOf('?flags') == -1){
-            lng == 'HU' ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
+            lng.toUpperCase().indexOf('HU') > -1 ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
             element.props.userCountry = lng;
           }
           if(lng && location.search.indexOf('?flags') > -1){
