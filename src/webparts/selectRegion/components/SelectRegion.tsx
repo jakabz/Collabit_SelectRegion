@@ -15,10 +15,10 @@ export default class SelectRegion extends React.Component<ISelectRegionProps, {}
   public clickHandler(item,e) {
     console.info(item);
     if(this.save){
-      cookie.save('SelectedCountry', item.Link.Url, { path: '/' });
-      location.href = item.Link.Url;
+      cookie.save('SelectedCountry', item[this.props.linkField].Url, { path: '/' });
+      location.href = item[this.props.linkField].Url;
     } else {
-      location.href = item.Link.Url;
+      location.href = item[this.props.linkField].Url;
     }
   }
 

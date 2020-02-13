@@ -19,8 +19,7 @@ import cookie from 'react-cookies';
 
 export interface ISelectRegionWebPartProps {
   title: string;
-  huLink: string;
-  dachLink: string;
+  LinkField: string;
   userCountry: string;
   cookieValue: string;
   countryList: any;
@@ -36,6 +35,7 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
       SelectRegion,
       {
         title: this.properties.title,
+        linkField: this.properties.LinkField,
         userCountry: this.country,
         cookieValue: cookie.load('SelectedCountry'),
         countryList: this.countryList
@@ -49,9 +49,13 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
         if(response){
           var lng = response.country;
           if(lng && location.search.indexOf('?flags') == -1){
-            lng.toUpperCase().indexOf('HU') > -1 ? location.href = this.properties.huLink : location.href = this.properties.dachLink;
+            if(this.properties.LinkField == 'Link'){
+              lng.toUpperCase().indexOf('HU') > -1 ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
+            } else {
+              lng.toUpperCase().indexOf('HU') > -1 ? location.href = '/sites/intranet_hu/SitePages/LifeAtQSHU.aspx' : location.href = '/sites/intranet_dach/SitePages/LifeAtQSHU.aspx';
+            }
             element.props.userCountry = lng;
-          }
+          } 
           if(lng && location.search.indexOf('?flags') > -1){
             this._getListData().then((resp) => {
               element.props.countryList = resp.value;
@@ -103,12 +107,9 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
                 PropertyPaneTextField('title', {
                   label: strings.TitleFieldLabel
                 }),
-                PropertyPaneTextField('huLink', {
-                  label: 'HU Url'
+                PropertyPaneTextField('LinkField', {
+                  label: 'Link field name'
                 }),
-                PropertyPaneTextField('dachLink', {
-                  label: 'DACH Url'
-                })
               ]
             }
           ]
