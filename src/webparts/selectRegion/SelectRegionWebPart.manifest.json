@@ -14,7 +14,9 @@
     "description": { "default": "Select region description" },
     "officeFabricIconFontName": "Globe",
     "properties": {
-      "title": "Select region"
+      "title": "Select region",
+      "huLink": "/sites/intranet_hu",
+      "dachLink": "/sites/intranet_dach"
     }
   }]
 }

@@ -19,6 +19,8 @@ import cookie from 'react-cookies';
 
 export interface ISelectRegionWebPartProps {
   title: string;
+  huLink: string;
+  dachLink: string;
   userCountry: string;
   cookieValue: string;
   countryList: any;
@@ -47,7 +49,7 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
         if(response){
           var lng = response.country;
           if(lng && location.search.indexOf('?flags') == -1){
-            lng.toUpperCase().indexOf('HU') > -1 ? location.href = '/sites/intranet_hu' : location.href = '/sites/intranet_dach';
+            lng.toUpperCase().indexOf('HU') > -1 ? location.href = this.properties.huLink : location.href = this.properties.dachLink;
             element.props.userCountry = lng;
           }
           if(lng && location.search.indexOf('?flags') > -1){
@@ -100,6 +102,12 @@ export default class SelectRegionWebPart extends BaseClientSideWebPart<ISelectRe
               groupFields: [
                 PropertyPaneTextField('title', {
                   label: strings.TitleFieldLabel
+                }),
+                PropertyPaneTextField('huLink', {
+                  label: 'HU Url'
+                }),
+                PropertyPaneTextField('dachLink', {
+                  label: 'DACH Url'
                 })
               ]
             }
